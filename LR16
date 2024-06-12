@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<title>lb16</title>
+<style>
+    .red {
+        background-color: red;
+    }
+    .green {
+        background-color: green;
+    }
+</style>
+</head>
+<body>
+
+<img src="https://mamabook.com.ua/wp-content/uploads/2019/02/%D0%B1%D0%B4%D0%B6%D0%BE%D0%BB%D0%BE%D1%97%D0%B4%D0%BA%D0%B0.jpg" id="img1" width="200" height="300">
+<img src="https://mamabook.com.ua/wp-content/uploads/2019/02/%D0%B1%D0%B4%D0%B6%D0%BE%D0%BB%D0%BE%D1%97%D0%B4%D0%BA%D0%B0.jpg" id="img2" width="200" height="300">
+<img src="https://mamabook.com.ua/wp-content/uploads/2019/02/%D0%B1%D0%B4%D0%B6%D0%BE%D0%BB%D0%BE%D1%97%D0%B4%D0%BA%D0%B0.jpg" id="img3" width="200" height="300">
+
+<script>
+    const img1 = document.getElementById('img1');
+    const img2 = document.getElementById('img2');
+    const img3 = document.getElementById('img3');
+
+    img1.onclick = function() {
+        alert(this.src);
+    }
+
+    img2.onclick = function() {
+        alert(this.src);
+    }
+
+    img3.onclick = function() {
+        alert(this.src);
+    }
+</script>
+
+<a href="https://nupp.edu.ua/" > політех</a>
+<a href="https://nupp.edu.ua/page/rozklad.html"> розклад</a>
+<a href="https://nupp.edu.ua/page/administratsiya.html" > адміністрація</a>
+
+<script>
+    const linksWithTitles = document.querySelectorAll('a');
+
+    function addTitle(event) {
+        event.target.title = event.target.textContent;
+    }
+
+    linksWithTitles.forEach(link => {
+        link.addEventListener('mouseenter', addTitle);
+    });
+</script>
+
+<a href="https://nupp.edu.ua/" id="link1">було</a>
+<a href="https://nupp.edu.ua/page/rozklad.html" id="link2">є</a>
+<a href="https://nupp.edu.ua/page/administratsiya.html" id="link3">та буде</a>
+
+<script>
+    const linksWithHref = document.querySelectorAll('a');
+
+    function addHref(event) {
+        const href = event.target.getAttribute('href');
+        event.target.textContent += ` (${href})`;
+        event.target.removeEventListener('mouseenter', addHref);
+    }
+
+    linksWithHref.forEach(link => {
+        let hovered = false;
+        link.addEventListener('mouseenter', function(event) {
+            if (!hovered) {
+                addHref(event);
+                hovered = true;
+                event.target.removeEventListener('mouseenter', arguments.callee);
+            }
+        });
+    });
+</script>
+
+<input type="text" id="input1" data-length="5">
+<input type="text" id="input2" data-length="10">
+<input type="text" id="input3" data-length="7">
+
+<p id="demo1">3</p>
+<p id="demo2">4</p>
+<p id="demo3">5</p>
+
+<script>
+    const inputs = document.querySelectorAll('input');
+
+    function displayInputValue(event) {
+        const maxLength = parseInt(event.target.dataset.length);
+        if (event.target.value.length === maxLength) {
+            event.target.style.borderColor = 'green';
+        } else {
+            event.target.style.borderColor = 'red';
+        }
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('blur', displayInputValue);
+    });
+
+    const paragraphs = document.querySelectorAll('p');
+
+    function squareNumber(event) {
+        const number = parseInt(event.target.textContent);
+        event.target.textContent = number * number;
+    }
+
+    paragraphs.forEach(paragraph => {
+        paragraph.addEventListener('click', squareNumber);
+    });
+
+    const divs = document.querySelectorAll('div');
+
+    function changeColor(event) {
+        const currentColor = event.target.style.backgroundColor;
+        event.target.style.backgroundColor = currentColor === 'red' ? 'green' : 'red';
+        event.target.removeEventListener('click', changeColor);
+    }
+
+    divs.forEach(div => {
+        div.addEventListener('click', changeColor);
+    });
+</script>
+
+
+<div id="div1" class="red" onclick="changeColor(event)">1</div>
+<div id="div2" class="red" onclick="changeColor(event)">2</div>
+<div id="div3" class="red" onclick="changeColor(event)"> 3</div>
+
+<script>
+    const divs = document.querySelectorAll('div');
+
+    let currentColor = 'red';
+
+    function changeColor(event) {
+        if (currentColor === 'red') {
+            event.target.classList.remove('red');
+            event.target.classList.add('green');
+            currentColor = 'green';
+        } else {
+            event.target.classList.remove('green');
+            event.target.classList.add('red');
+            currentColor = 'red';
+        }
+    }
+</script>
+
+</body>
+</html>
